@@ -6,6 +6,7 @@ Munin-Plugin for netatmo
 Configuration
 =============
 
+  * Install PHP-CLI
   * Clone the Repository to any Folder you like
   * Add your Netatmo-App-Credentials to ```./Netatmo-API/Config.php```
   * Create Symlinks in your Munin-Plugin-Directory
