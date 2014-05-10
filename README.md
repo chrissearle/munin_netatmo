@@ -13,16 +13,29 @@ Configuration
 
 The Symlinks must follow a specific schema:
 
-```netatmo_$module_$value```
+```
+netatmo_$module_$value
+```
 
 Example: 
 
-If your Module is named ```Indoor``` and you want to add the ```Temperature``` to Munin the Symlink-Name has to be: ```netatmo_Indoor_Temperature```
+If your Module is named ```Indoor``` and you want to add the ```Temperature``` to Munin the Symlink-Name has to be: 
+
+```
+netatmo_Indoor_Temperature
+```
 
 If your Module is named ```Outdoor``` and you want to add the ```Humidity``` the Symlink-Name has to be:
-```netatmo_Outdoor_Humidity```
 
-The Symlink-Target is always ```netatmo_.php```.
+```
+netatmo_Outdoor_Humidity
+```
+
+The Symlink-Target is always:
+
+``` 
+netatmo_.php 
+```
 
 Possible Values are:
 
