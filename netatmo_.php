@@ -3,7 +3,7 @@
 
 # Create a symlink with the following name-schema:
 # netatmo_$module_$value
-# 
+#
 # $module is the name of your Netatmo-Module
 # $key can be:
 #      Temperature
@@ -24,7 +24,7 @@ foreach ($argv as $arg) {
   $e=explode("=",$arg);
   if(count($e)==2)
     $_GET[$e[0]]=$e[1];
-  else    
+  else
     $_GET[$e[0]]=0;
 }
 
@@ -41,7 +41,7 @@ if (key_exists("nodes",$_GET)) {
 if (key_exists("config",$_GET)) {
   echo "graph_title ".$get_value." ".$get_module;
   echo "\n";
-  echo "graph_vlabel ".$get_module."_".$get_value;
+  echo "graph_vlabel ".$get_module.$get_value;
   echo "\n";
   switch ($get_value) {
     case "Temperature":
@@ -77,7 +77,7 @@ if (key_exists("config",$_GET)) {
   echo "\n";
   echo "graph_scale no\n";
   echo "graph_category netatmo\n";
-  die(); 
+  die();
 }
 if (key_exists("version",$_GET)) {
   echo("munin node on ".gethostname()." version: 1.0.0 (munin-netatmo)\n");
@@ -97,8 +97,8 @@ $client->setVariable("password", $test_password);
 
 $helper = new NAApiHelper();
 try {
-    $tokens = $client->getAccessToken();        
-    
+    $tokens = $client->getAccessToken();
+
 } catch(NAClientException $ex) {
     echo "An error happend while trying to retrieve your tokens : \n";
     die();
@@ -117,7 +117,7 @@ $module=$device["modules"][0];
 
 foreach($last_mesures[0]['modules'] as $module) {
   if ($module['module_name'] == $get_module) {
-    echo $get_value.$get_module.".value ".$module[$get_value];
+    echo $get_module.$get_value.".value ".$module[$get_value];
     echo "\n";
     die();
   }
