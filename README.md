@@ -56,3 +56,5 @@ Netatmo only allows a very low number of API-Calls. So it might be needed to low
 ```
 PHP Fatal error:  Uncaught exception 'NAApiErrorType' with message 'User usage reached' in /srv/git/netatmo/Netatmo-API/NAApiClient.php:356
 ```
+
+The Default Munin-Setup together with two Netatmo-Modules works fine, though.
