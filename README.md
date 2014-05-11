@@ -48,6 +48,8 @@ Possible Values are:
 
 Please note that Outdoor-Modules only supports ```Temperature``` and ```Humidity```. 
 
+If you want Temperature/Humidity in one Graph for all Modules just use ```netatmo_Temperature.php``` and/or ```netatmo_Humidity.php```, no naming Schema is required here.
+
 Limitations
 ===========
 
