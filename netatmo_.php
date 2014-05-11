@@ -45,12 +45,12 @@ if (key_exists("config",$_GET)) {
   echo "\n";
   switch ($get_value) {
     case "Temperature":
-      echo $get_module."_Temperature.label Degrees\n";
+      echo $get_module."Temperature.label Degrees\n";
       echo "graph_info The Temperature\n";
       #echo "graph_args --base 1 -l -50";
       break;
     case "Humidity":
-      echo $get_module."_Humidity.label %\n";
+      echo $get_module."Humidity.label %\n";
       echo "graph_info The Humidity\n";
       #echo "graph_args --base 1 -l -0";
       break;
