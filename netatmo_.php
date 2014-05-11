@@ -47,34 +47,28 @@ if (key_exists("config",$_GET)) {
     case "Temperature":
       echo $get_module."Temperature.label Degrees\n";
       echo "graph_info The Temperature\n";
-      #echo "graph_args --base 1 -l -50";
       break;
     case "Humidity":
       echo $get_module."Humidity.label %\n";
       echo "graph_info The Humidity\n";
-      #echo "graph_args --base 1 -l -0";
       break;
     case "CO2":
       echo $get_module."CO2.label ppm\n";
       echo $get_module."CO2.warning 1000\n";
       echo $get_module."CO2.critical 2000\n";
       echo "graph_info The CO2-Level. Should be not over 2.000.\n";
-      #echo "graph_args --base 1 -l 200";
       break;
     case "Pressure":
       echo $get_module."Pressure.label mbar\n";
       echo "graph_info The Air-Pressure.\n";
-      #echo "graph_args --base 1 -l 0";
       break;
     case "Noise":
       echo $get_module."Noise.label dB\n";
       echo $get_module."Noise.warning 65\n";
       echo $get_module."Noise.critical 85\n";
       echo "graph_info The Noise around your Sensor. Should not be over 75dB for a longer time.\n";
-      #echo "graph_args --base 1 -l 0";
       break;
   }
-  echo "\n";
   echo "graph_scale no\n";
   echo "graph_category netatmo\n";
   die();
