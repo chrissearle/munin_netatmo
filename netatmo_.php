@@ -66,7 +66,7 @@ if (key_exists("config",$_GET)) {
       echo $get_module."Noise.label dB\n";
       echo $get_module."Noise.warning 65\n";
       echo $get_module."Noise.critical 85\n";
-      echo "graph_info The Noise around your Sensor. Should not be over 75dB for a longer time.\n";
+      echo "graph_info The Noise around your Sensor. Should not be over 65dB for a longer time.\n";
       break;
   }
   echo "graph_scale no\n";
