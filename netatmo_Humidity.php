@@ -5,7 +5,7 @@ foreach ($argv as $arg) {
   $e=explode("=",$arg);
   if(count($e)==2)
     $_GET[$e[0]]=$e[1];
-  else
+  else    
     $_GET[$e[0]]=0;
 }
 
@@ -37,8 +37,8 @@ $client->setVariable("password", $test_password);
 
 $helper = new NAApiHelper();
 try {
-    $tokens = $client->getAccessToken();
-
+    $tokens = $client->getAccessToken();        
+    
 } catch(NAClientException $ex) {
     echo "An error happend while trying to retrieve your tokens\n";
     die();
@@ -61,15 +61,24 @@ if (key_exists("config",$_GET)) {
   echo "graph_vlabel Humidity\n";
   echo "graph_info The Humidity (all Modules)\n";
   echo "graph_scale no\n";
-  echo "graph_category netatmo\n";
+  echo "graph_category netatmo\n"; 
 }
 
+$color=7;
 foreach($last_mesures[0]['modules'] as $module) {
-  if (key_exists("config",$_GET)) {
-    echo $module['module_name']."Humidity.label ".$module['module_name']."\n";
-  } else {
-    echo $module['module_name']."Humidity.value ".floatval($module['Humidity']);
-    echo "\n";
+  if (key_exists("Humidity",$module)) {
+    if (key_exists("config",$_GET)) {
+      if (key_exists("CO2",$module)) {
+        echo $module['module_name']."Humidity.colour COLOUR".$color."\n";
+      } else {
+        echo $module['module_name']."Humidity.colour COLOUR".$color."\n";
+      }
+      echo $module['module_name']."Humidity.label ".$module['module_name']."\n";
+    } else {
+      echo $module['module_name']."Humidity.value ".floatval($module['Humidity']);
+      echo "\n";
+    }
+    $color++;
   }
 }
 
