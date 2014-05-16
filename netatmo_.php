@@ -3,7 +3,7 @@
 
 # Create a symlink with the following name-schema:
 # netatmo_$module_$value
-#
+# 
 # $module is the name of your Netatmo-Module
 # $key can be:
 #      Temperature
@@ -24,7 +24,7 @@ foreach ($argv as $arg) {
   $e=explode("=",$arg);
   if(count($e)==2)
     $_GET[$e[0]]=$e[1];
-  else
+  else    
     $_GET[$e[0]]=0;
 }
 
@@ -46,32 +46,40 @@ if (key_exists("config",$_GET)) {
   switch ($get_value) {
     case "Temperature":
       echo $get_module."Temperature.label Degrees\n";
+      echo $get_module."Temperature.colour COLOUR7\n";
       echo "graph_info The Temperature\n";
       break;
     case "Humidity":
-      echo $get_module."Humidity.label %\n";
+      echo $get_module."Humidity.label Percent\n";
+      echo $get_module."Humidity.colour COLOUR7\n";
       echo "graph_info The Humidity\n";
       break;
     case "CO2":
       echo $get_module."CO2.label ppm\n";
       echo $get_module."CO2.warning 1000\n";
       echo $get_module."CO2.critical 2000\n";
-      echo "graph_info The CO2-Level. Should be not over 2.000.\n";
+      echo $get_module."CO2.colour COLOUR7\n";
+      echo "graph_info The CO2-Level. Should be not over 2.000. It should drop below 400 once a week for calibration.\n";
       break;
     case "Pressure":
       echo $get_module."Pressure.label mbar\n";
+      echo $get_module."Pressure.colour 1\n";
+      echo $get_module."Pressure.colour COLOUR7\n";
       echo "graph_info The Air-Pressure.\n";
+      echo "graph_args --upper-limit 1100 --lower-limit 900 --rigid";
       break;
     case "Noise":
       echo $get_module."Noise.label dB\n";
       echo $get_module."Noise.warning 65\n";
       echo $get_module."Noise.critical 85\n";
-      echo "graph_info The Noise around your Sensor. Should not be over 65dB for a longer time.\n";
+      echo $get_module."Noise.colour COLOUR7\n";
+      echo "graph_info The Noise around your Sensor. Should not be over 75dB for a longer time.\n";
       break;
   }
+  echo "\n";
   echo "graph_scale no\n";
   echo "graph_category netatmo\n";
-  die();
+  die(); 
 }
 if (key_exists("version",$_GET)) {
   echo("munin node on ".gethostname()." version: 1.0.0 (munin-netatmo)\n");
@@ -91,8 +99,8 @@ $client->setVariable("password", $test_password);
 
 $helper = new NAApiHelper();
 try {
-    $tokens = $client->getAccessToken();
-
+    $tokens = $client->getAccessToken();        
+    
 } catch(NAClientException $ex) {
     echo "An error happend while trying to retrieve your tokens : \n";
     die();
@@ -111,7 +119,7 @@ $module=$device["modules"][0];
 
 foreach($last_mesures[0]['modules'] as $module) {
   if ($module['module_name'] == $get_module) {
-    echo $get_module.$get_value.".value ".$module[$get_value];
+    echo $get_module.$get_value.".value ".floatval($module[$get_value]);
     echo "\n";
     die();
   }
