@@ -27,38 +27,39 @@ if (key_exists("quit",$_GET)) {
   die();
 }
 
-require_once("Netatmo-API/NAApiClient.php");
-require_once("Netatmo-API/Config.php");
+if (filemtime('/tmp/netatmo_cache') < time() - 900) {
+  unlink('/tmp/netatmo_cache');
 
-$client = new NAApiClient($config);
+  require_once("Netatmo-API/NAApiClient.php");
+  require_once("Netatmo-API/Config.php");
 
-$client->setVariable("username", $test_username);
-$client->setVariable("password", $test_password);
+  $client = new NAApiClient($config);
 
-$helper = new NAApiHelper();
-try {
+  $client->setVariable("username", $test_username);
+  $client->setVariable("password", $test_password);
+
+  $helper = new NAApiHelper();
+  try {
     $tokens = $client->getAccessToken();        
     
-} catch(NAClientException $ex) {
+  } catch(NAClientException $ex) {
     echo "An error happend while trying to retrieve your tokens\n";
     die();
+  }
+
+  // Retrieve User Info :
+  $user = $client->api("getuser", "POST");
+
+  $devicelist = $client->api("devicelist", "POST");
+  $devicelist = $helper->SimplifyDeviceList($devicelist);
+
+  $last_mesures = $helper->GetLastMeasures($client,$devicelist);
+
+  file_put_contents('/tmp/netatmo_cache', serialize($last_mesures));
+} else {
+  echo "# Using cache\n";
+  $last_mesures = unserialize(file_get_contents('/tmp/netatmo_cache'));
 }
-
-// Retrieve User Info :
-$user = $client->api("getuser", "POST");
-
-$devicelist = $client->api("devicelist", "POST");
-
-#print_r($devicelist);
-
-$devicelist = $helper->SimplifyDeviceList($devicelist);
-
-$last_mesures = $helper->GetLastMeasures($client,$devicelist);
-
-$device=$devicelist["devices"][0];
-$module=$device["modules"][0];
-
-#print_r($devicelist);
 
 if (key_exists("config",$_GET)) {
   echo "graph_title CO2\n";
@@ -83,7 +84,5 @@ foreach($last_mesures[0]['modules'] as $module) {
     $color++;
   }
 }
-
-#print_r($module);
 
 ?>
