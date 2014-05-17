@@ -54,10 +54,10 @@ If you want Temperature/Humidity in one Graph for all Modules just use ```netatm
 Limitations
 ===========
 
-Netatmo only allows a very low number of API-Calls. So it might be needed to lower your Munin-Cronjob-Intensity. Otherwise you might get the following error:
+Netatmo only allows a very low number of API-Calls. So you might get the following error:
 
 ```
 PHP Fatal error:  Uncaught exception 'NAApiErrorType' with message 'User usage reached' in /srv/git/netatmo/Netatmo-API/NAApiClient.php:356
 ```
 
-We are using a cache file now, which stores the API results for 15 Minutes, so you shouldn't run in this problem anymore.
+We are using a cache file now, which stores the API results for 15 Minutes, so you shouldn't run in this problem anymore. If you have many Sensors you might have to increase the Cache-Timeout.
