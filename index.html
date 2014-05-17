@@ -1,42 +1,34 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Munin netatmo : Munin-Plugin for netatmo" />
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <title>Munin netatmo</title>
+    <title>Munin netatmo by gpkvt</title>
   </head>
 
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/gpkvt/munin_netatmo">View on GitHub</a>
+    <header>
+      <div class="container">
+        <h1>Munin netatmo</h1>
+        <h2>Munin-Plugin for netatmo</h2>
 
-          <h1 id="project_title">Munin netatmo</h1>
-          <h2 id="project_tagline">Munin-Plugin for netatmo</h2>
+        <section id="downloads">
+          <a href="https://github.com/gpkvt/munin_netatmo/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/gpkvt/munin_netatmo/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/gpkvt/munin_netatmo" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/gpkvt/munin_netatmo/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/gpkvt/munin_netatmo/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="container">
+      <section id="main_content">
         <h1>
-<a name="munin_netatmo" class="anchor" href="#munin_netatmo"><span class="octicon octicon-link"></span></a>munin_netatmo</h1>
-
-<p>Munin-Plugin for netatmo</p>
-
-<h1>
 <a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h1>
 
 <ul>
@@ -45,6 +37,7 @@
 <li>Add your Netatmo-App-Credentials to <code>./Netatmo-API/Config.php</code>
 </li>
 <li>Create Symlinks in your Munin-Plugin-Directory</li>
+<li>Make sure /tmp/ is writeable for PHP</li>
 <li>Restart Munin-Node</li>
 </ul><p>The Symlinks must follow a specific schema:</p>
 
@@ -88,19 +81,10 @@
 <pre><code>PHP Fatal error:  Uncaught exception 'NAApiErrorType' with message 'User usage reached' in /srv/git/netatmo/Netatmo-API/NAApiClient.php:356
 </code></pre>
 
-<p>The Default Munin-Setup together with two Netatmo-Modules works fine, though.</p>
+<p>We are using a cache file now, which stores the API results for 15 Minutes, so you shouldn't run in this problem anymore.</p>
       </section>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Munin netatmo maintained by <a href="https://github.com/gpkvt">gpkvt</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
     
-
   </body>
 </html>
