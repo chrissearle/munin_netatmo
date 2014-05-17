@@ -10,6 +10,7 @@ Configuration
   * Clone the Repository to any Folder you like
   * Add your Netatmo-App-Credentials to ```./Netatmo-API/Config.php```
   * Create Symlinks in your Munin-Plugin-Directory
+  * Make sure /tmp/ is writeable for PHP
   * Restart Munin-Node
 
 The Symlinks must follow a specific schema:
@@ -59,4 +60,4 @@ Netatmo only allows a very low number of API-Calls. So it might be needed to low
 PHP Fatal error:  Uncaught exception 'NAApiErrorType' with message 'User usage reached' in /srv/git/netatmo/Netatmo-API/NAApiClient.php:356
 ```
 
-The Default Munin-Setup together with two Netatmo-Modules works fine, though.
+We are using a cache file now, which stores the API results for 15 Minutes, so you shouldn't run in this problem anymore.
